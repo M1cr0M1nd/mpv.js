@@ -34,6 +34,7 @@ function getPluginEntry(pluginDir, pluginName = "mpvjs.node") {
   const fullPluginPath = path.join(pluginDir, pluginName);
   // Try relative path to workaround ASCII-only path restriction.
   let pluginPath = path.relative(process.cwd(), fullPluginPath);
+
   if (path.dirname(pluginPath) === ".") {
     // "./plugin" is required only on Linux.
     if (process.platform === "linux") {

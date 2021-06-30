@@ -6,7 +6,6 @@ const {getPluginEntry} = require("../index");
 require("electron-debug")({showDevTools: false});
 
 const pdir = path.join(__dirname, "..", "build", "Release");
-if (process.platform !== "linux") {process.chdir(pdir);}
 app.commandLine.appendSwitch("no-sandbox");
 app.commandLine.appendSwitch("ignore-gpu-blacklist");
 app.commandLine.appendSwitch("register-pepper-plugins", getPluginEntry(pdir));
@@ -18,7 +17,11 @@ app.on("ready", () => {
     autoHideMenuBar: true,
     useContentSize: process.platform !== "linux",
     title: "mpv.js example player",
-    webPreferences: {plugins: true},
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      plugins: true,
+    },
   });
   win.setMenu(null);
   win.loadURL(`file://${__dirname}/index.html`);

@@ -3,3 +3,5 @@
 /build/
 /prebuilds/
 /scripts/dist/
+.DS_STORE
+.idea
